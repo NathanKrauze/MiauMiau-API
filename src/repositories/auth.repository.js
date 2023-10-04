@@ -1,7 +1,7 @@
 import { db } from "../database/database.connection.js";
 
 export function existSessionDB(token) {
-    return db.query(`SELECT "userId" FROM sessions WHERE token=$1;`, [token]);
+    return db.query(`SELECT "user_id" FROM sessions WHERE token=$1;`, [token]);
 };
 
 export function createSessionDB(userId, token) {

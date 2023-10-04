@@ -9,7 +9,7 @@ export async function validateAuth(req, res, next) {
     try {
         const session = await existSessionDB(token);
         if (!session.rows[0]) return res.sendStatus(401).send({message: "Unauthorized"});
-        res.locals.userId = session.rows[0].userId;
+        res.locals.userId = session.rows[0].user_id;
 
         next();
     } catch (err) {
