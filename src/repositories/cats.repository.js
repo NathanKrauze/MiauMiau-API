@@ -16,3 +16,7 @@ export function getCatByIdDB(id){
 	    WHERE cats.id = $1;`
     ,[id])
 }
+
+export function updateCatDisponibilityDB(id, available, userId){
+    return db.query(`UPDATE cats set available = $1 WHERE id = $2 AND tutor_id = $3 RETURNING id;`,[available, id, userId])
+}

@@ -1,4 +1,4 @@
-import { getCatByIdDB, getCatsDB, postCatDB } from "../repositories/cats.repository.js";
+import { getCatByIdDB, getCatsDB, postCatDB, updateCatDisponibilityDB } from "../repositories/cats.repository.js";
 
 export async function postCats(req, res){
     const {name, photo, characteristics} = req.body;
@@ -31,7 +31,12 @@ export async function getCatById(req, res){
 }
 
 export async function updateCatDisponibility(req, res){
+    const {id} = req.params;
+    const { available } = req.body;
+    const {userId} = res.locals;
     try{
+        const {rows:[result]} = await updateCatDisponibilityDB(id, available, userId);
+        if(!result) return res.status(401).send({message: "you can only update your own cats!"})
         res.send('ok')
     }catch(err){
         res.status(500).send(err.message);

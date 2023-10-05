@@ -1,7 +1,9 @@
 import { Router } from "express";
-import { validateSchema } from "../middlewares/validateSchemas.js";
-import { signUpSchema } from "../schemas/users.schemas.js";
+import { validateAuth } from "../middlewares/validateAuth.js";
+import { getUsersCats } from "../controllers/users.controllers.js";
 
-const usersRouter = Router()
+const usersRouter = Router();
+
+usersRouter.get('/users/cats', validateAuth, getUsersCats);
 
 export default usersRouter;
