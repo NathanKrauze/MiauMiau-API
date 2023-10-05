@@ -1,4 +1,4 @@
-import { postCatDB } from "../repositories/cats.repository.js";
+import { getCatsDB, postCatDB } from "../repositories/cats.repository.js";
 
 export async function postCats(req, res){
     const {name, photo, characteristics} = req.body;
@@ -13,7 +13,8 @@ export async function postCats(req, res){
 
 export async function getCats(req, res){
     try{
-        res.send('ok')
+        const cats = await getCatsDB();
+        res.send(cats.rows)
     }catch(err){
         res.status(500).send(err.message);
     }

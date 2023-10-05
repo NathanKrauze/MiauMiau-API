@@ -4,11 +4,12 @@ export async function validateAuth(req, res, next) {
 
     const { authorization } = req.headers;
     const token = authorization?.replace("Bearer ", "");
-    if (!token) return res.sendStatus(401).send({message: "Token not sended"});
+    if (!token) return res.status(401).send({message: "Token not sended"});
+    console.log(authorization)
 
     try {
         const session = await existSessionDB(token);
-        if (!session.rows[0]) return res.sendStatus(401).send({message: "Unauthorized"});
+        if (!session.rows[0]) return res.status(401).send({message: "Unauthorized"});
         res.locals.userId = session.rows[0].user_id;
 
         next();
