@@ -7,7 +7,7 @@ import { getCatById, getCats, postCats, updateCatDisponibility } from "../contro
 const catsRouter = Router();
 
 catsRouter.post("/cats", validateSchema(catSchema), validateAuth, postCats);
-catsRouter.get('/cats', getCats);
+catsRouter.get('/cats', validateAuth, getCats);
 catsRouter.get('/cats/:id', getCatById);
 catsRouter.put('/cats/:id', updateCatDisponibility);
 

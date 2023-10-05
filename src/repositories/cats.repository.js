@@ -7,3 +7,12 @@ export function postCatDB(name, photo, characteristics, userId){
 export function getCatsDB(){
     return db.query(`SELECT id, name, photo FROM cats;`)
 }
+
+export function getCatByIdDB(id){
+    return db.query(`
+    SELECT cats.id, cats.name, cats.photo, cats.characteristics, users.name AS username, users.phone AS user_phone 
+        FROM cats
+	    JOIN users ON users.id = cats.tutor_id
+	    WHERE cats.id = $1;`
+    ,[id])
+}

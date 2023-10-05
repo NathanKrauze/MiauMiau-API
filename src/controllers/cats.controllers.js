@@ -1,4 +1,4 @@
-import { getCatsDB, postCatDB } from "../repositories/cats.repository.js";
+import { getCatByIdDB, getCatsDB, postCatDB } from "../repositories/cats.repository.js";
 
 export async function postCats(req, res){
     const {name, photo, characteristics} = req.body;
@@ -21,8 +21,10 @@ export async function getCats(req, res){
 }
 
 export async function getCatById(req, res){
+    const {id} = req.params;
     try{
-        res.send('ok')
+        const { rows: [cat]} = await getCatByIdDB(id)
+        res.send(cat)
     }catch(err){
         res.status(500).send(err.message);
     }
