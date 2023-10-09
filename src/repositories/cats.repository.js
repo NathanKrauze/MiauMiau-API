@@ -5,7 +5,7 @@ export function postCatDB(name, photo, characteristics, userId){
 }
 
 export function getCatsDB(){
-    return db.query(`SELECT id, name, photo FROM cats;`)
+    return db.query(`SELECT id, name, photo, available FROM cats WHERE available = 'true' ORDER BY id;`)
 }
 
 export function getCatByIdDB(id){

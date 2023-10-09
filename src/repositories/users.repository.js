@@ -12,5 +12,5 @@ export function createUserDB(name, cpf, phone, email, hash) {
 };
 
 export function getUsersCatsDB(userId){
-    return db.query(`SELECT * FROM cats WHERE tutor_id = $1;`,[userId])
+    return db.query(`SELECT * FROM cats WHERE tutor_id = $1 ORDER BY id;`,[userId])
 }
